@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 int main()
@@ -17,8 +17,7 @@ int main()
 
     cin >> selection;
 
-
-    //цикл для ввода  с клавы
+    //ввод с клавиатуры 
     if (selection == 1)
     {
         cout << "Enter values" << endl;
@@ -27,7 +26,7 @@ int main()
             cin >> arr[i];
         }
     }
-    /// цикл заполняет массив рандомными числами 
+    //Заполнение рандомными числами
     else if (selection == 2)
     {
         int BeginRange;
@@ -44,7 +43,7 @@ int main()
             arr[i] = rand() % EndRange + BeginRange;
         }
     }
-     //сортировка массива по возрастанию
+    //сортировка по возрастанию
     int temp;
     for (int i = 0; i < size; i++)
     {
@@ -58,7 +57,7 @@ int main()
             }
         }
     }
-
+    //цикл выводит массив
     cout << "Array: ";
     for (int i = 0; i < size; i++)
     {
@@ -66,9 +65,8 @@ int main()
     }
     cout << endl;
 
-    //сумма положительных элементов
+    //сумма положительных элементов массива
     int sum = 0;
-
     for (int i = 0; i < size; i++)
     {
         if (arr[i] > 0)
@@ -77,62 +75,26 @@ int main()
         }
     }
     cout << "sum is: " << sum << endl;;
-
-    //находишь позицию мин элемента 
-    int min;
-    min = arr[0];
-    int pos_min = 0;
-
-    for (int i = 0; i < size; i++)
+    
+    //считаем кол-во повторяющихся максимальных и минимальных чисел
+    int max_count = 0;
+    int min_count = 0;
+    for (int i = size - 1, j = 0; i > 0 && j < size; i--, j++)
     {
-        if (fabs(arr[i]) < min)
+        if (arr[size - 1] == arr[i])
         {
-            pos_min = i;
-            min = arr[i];
+            max_count++;
         }
-    }
-
-    //находишь макс позицию элемента
-    int max;
-    max = arr[0];
-    int pos_max = 0;
-
-    for (int i = 0; i < size; i++)
-    {
-        if (fabs(arr[i]) > max)
+        else
         {
-            pos_max = i;
-            max = arr[i];
-        }
-    }
-
-    //произведение элементов массива, расположенных между первым максимальным по модулю и последним минимальным по модулю элементами.
-
-    int mult = 1;
-
-    for (int i = pos_max - 1; i != pos_min; i--)
-    {
-        mult = mult * arr[i];
-    }
-    cout << "Multiply: " << mult << endl;
-
-    //Упорядочить элементы массива с нечетными номерами по убыванию.
-    for (int i = 0; i < (size / 2); i++)
-    {
-        for (int j = 0; j < size - i - 2; j++)
-        {
-            if (j % 2 != 0 && fabs(arr[j]) < fabs(arr[j + 2]))
+            if (arr[0] == arr[j])
             {
-                temp = arr[j];
-                arr[j] = arr[j + 2];
-                arr[j + 2] = temp;
+                min_count++;
             }
         }
     }
-    // цикл выводит массив
-    for (int i = 0; i < size; i++)
+    
+    //произведение элементов массива, расположенных между первым максимальным по модулю и последним минимальным по модулю элементами
+    int mult = 1;
+    for (int i = size - max_count - 1; i != 0 + min_count; i--)
     {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-}
